@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Nevy Angelova's portfolio</title>
+        <title>Nevy Angelova&aposs portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

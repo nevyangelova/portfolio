@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
   },
   "dependencies": {
     "@react95/core": "6.0.4",

@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 type Props = {};
@@ -64,7 +65,7 @@ export const Header = (props: Props): JSX.Element => {
         <StyledHeader>
             <Grid>
                 <Item>
-                    <div class='icon w-embed'>
+                    <div className='icon w-embed'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='16px'
@@ -76,63 +77,62 @@ export const Header = (props: Props): JSX.Element => {
                             <path d='M215.8,118.2a8,8,0,0,0-5-5.7L153.2,90.9l14.6-73.3a8.1,8.1,0,0,0-4.1-8.7,7.9,7.9,0,0,0-9.5,1.6l-112,120a7.9,7.9,0,0,0-2,7.3,8.2,8.2,0,0,0,5,5.7l57.6,21.6L88.2,238.4a8.1,8.1,0,0,0,4.1,8.7,8.4,8.4,0,0,0,3.7.9,7.9,7.9,0,0,0,5.8-2.5l112-120A7.9,7.9,0,0,0,215.8,118.2Z'></path>
                         </svg>
                     </div>
-                    <div class='text-block-10'>Nevy Angelova</div>
+                    <div className='text-block-10'>Nevy Angelova</div>
                 </Item>
                 <Item
                     id='w-node-_6a27d2ae-198d-1e34-3077-de3a5167533a-bee34dae'
                     data-w-id='6a27d2ae-198d-1e34-3077-de3a5167533a'
-                    class='div-block-17 click__theme'
+                    className='div-block-17 click__theme'
                 >
                     <div>Switch Theme</div>
                 </Item>
             </Grid>
             <Grid justify={'end'}>
                 <Item>
-                    <img
+                    <Image
                         src='https://assets.website-files.com/637fe1f84b89d92db337544d/637fe1f84b89d96a6737548e_spotify%201.svg'
                         loading='lazy'
                         id='w-node-a0edeb8a-ea0e-6693-0742-caa28457d5bd-bee34dae'
                         alt=''
-                        class='image-17'
+                        className='image-17'
                     />
-                    <div class='text-block-3 capitalize'>Your time:</div>
-                    <div id='digital-clock' class='text-block-3'>
+                    <div className='text-block-3 capitalize'>Your time:</div>
+                    <div id='digital-clock' className='text-block-3'>
                         4:44 PM
                     </div>
                 </Item>
                 <Item>
-                    <img
+                    <Image
                         src='https://assets.website-files.com/637fe1f84b89d92db337544d/637fe1f84b89d93246375475_Menu%20bar%20resizer.svg'
                         loading='lazy'
                         id='w-node-_60cc4b26-d371-e7d9-898c-2505587c2179-bee34dae'
                         alt=''
-                        class='image-3'
+                        className='image-3'
                     />
-                    <div class='text-block-3 capitalize'>Where I am:</div>
-                    <div class='text-block-3 barcelona_time'>4:44 PM</div>
+                    <div className='text-block-3 capitalize'>Where I am:</div>
+                    <div className='text-block-3 barcelona_time'>4:44 PM</div>
                 </Item>
                 <Item>
-                    <img
+                    <Image
                         src='https://assets.website-files.com/637fe1f84b89d92db337544d/637fe1f84b89d93246375475_Menu%20bar%20resizer.svg'
                         loading='lazy'
                         id='w-node-_75ff718c-d2d4-738d-236f-e9f85fff0087-bee34dae'
                         alt=''
-                        class='image-3 mobile-hide'
+                        className='image-3 mobile-hide'
                     />
                     <div
                         id='w-node-_72d5522c-84e8-35cb-9244-4e9127aca0fc-bee34dae'
-                        class='div-block-32-copy'
+                        className='div-block-32-copy'
                     >
-                        <img
+                        <Image
                             src='https://assets.website-files.com/637fe1f84b89d92db337544d/637fe1f84b89d9a2f9375470_Monitor%20resolution.svg'
                             loading='lazy'
                             alt=''
                         />
                     </div>
-                    <div class='w-embed'>
+                    <div className='w-embed'>
                         <div
-                            class='div-block-fullscreen'
-                            type='button'
+                            className='div-block-fullscreen'
                             value='Full Screen'
                             onclick='toggleFullScreen()'
                         />
