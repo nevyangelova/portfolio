@@ -1,20 +1,18 @@
 import Head from 'next/head';
-import { Button } from '@react95/core';
-import { Access229 } from '@react95/icons';
 import Header from '../components/header';
-import Shortcuts from '../components/shortcuts';
+import dynamic from 'next/dynamic';
+
+const Desktop = dynamic(import('../components/desktop'), { ssr: false });
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Nevy Angelova&aposs portfolio</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Nevy Angelova portfolio</title>
+        <link rel="icon" href="/nevy.ico" />
       </Head>
-
       <Header/>
-
-      <Shortcuts/>
+      <Desktop/>
     </div>
   );
 }

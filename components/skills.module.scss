@@ -1,0 +1,38 @@
+.tan,
+.red,
+.pink,
+.blue,
+.magenta {
+    transition: background-color 0.2s ease-in;
+}
+.tan {
+    background-color: #f0e8d8;
+}
+.red {
+    background-color: #f8333e;
+}
+.pink {
+    background-color: #c8878d;
+}
+.blue {
+    background-color: #95a8cb;
+}
+.magenta {
+    background-color: #ab004f;
+}
+
+.button {
+    text-align: center;
+    background: black;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
