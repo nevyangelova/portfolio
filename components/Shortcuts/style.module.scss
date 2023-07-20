@@ -1,0 +1,114 @@
+.container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-4px);
+    }
+    
+    .icon {
+        color: white;
+        stroke-width: 1.5;
+        margin-bottom: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    div {
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        justify-content: space-around;
+    }
+}
+
+.desktopIcons {
+  position: absolute;
+  top: 24px; /* Below the header */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 24px);
+  z-index: 10;
+}
+
+.desktopIcon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  z-index: 20;
+  
+  /* System.css font */
+  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: 1px dotted rgba(255, 255, 255, 0.8);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  .icon {
+    color: white;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+    margin-bottom: 4px;
+  }
+  
+  div {
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding: 2px 4px;
+    white-space: nowrap;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Highlighted text effect */
+    &.selected {
+      background-color: navy;
+      color: white;
+    }
+  }
+}
+
+/* Remove the old container style as we now have desktop icons */
+.container {
+  display: none;
+}

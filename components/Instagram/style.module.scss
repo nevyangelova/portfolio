@@ -1,0 +1,171 @@
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.modalBody {
+  padding: 10px;
+  max-height: 70vh;
+  overflow-y: auto;
+  
+  .modalImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 16px 0;
+    line-height: 1.5;
+  }
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  background: #e6e6e6;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: 1px solid #dfdfdf;
+}
+
+.visitButton {
+  background: #0078d4;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  
+  &:hover {
+    background: #106ebe;
+  }
+}
+
+.storiesContainer {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  gap: 12px;
+  
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 3px;
+  }
+}
+
+.storyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.storyThumbnail {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #c2c2c2;
+  padding: 2px;
+  object-fit: cover;
+}
+
+.storyUsername {
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.addStory {
+  .plusIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #c2c2c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      background-color: #000;
+    }
+    
+    &::before {
+      width: 20px;
+      height: 2px;
+    }
+    
+    &::after {
+      width: 2px;
+      height: 20px;
+    }
+  }
+}
+
+.postContent {
+  width: 100%;
+}
+
+.postItem {
+  margin-bottom: 20px;
+}
+
+.postImage {
+  width: 100%;
+  height: auto;
+  border: 1px solid #dfdfdf;
+}
+
+.postIcons {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.postIcon {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  
+  img {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.titleImage {
+  margin-right: 8px;
+  display: inline-flex;
+  vertical-align: middle;
+} 

@@ -1,0 +1,137 @@
+.playerBody {
+  padding: 12px !important;
+  background: #f0f0f0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.trackInfo {
+  background: #e6e6e6;
+  padding: 8px;
+  border: 1px solid #d4d4d4;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  .trackTitle {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .trackArtist {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .timeInfo {
+    font-size: 11px;
+    color: #333;
+    font-family: "Lucida Console", Monaco, monospace;
+    min-width: 30px;
+  }
+  
+  .progressBar {
+    flex: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #d4d4d4;
+    outline: none;
+    border-radius: 2px;
+    
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #888;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    &::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: #888;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .controlButton {
+    background: #e0e0e0;
+    border: 1px solid #d4d4d4;
+    color: #555;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: #d4d4d4;
+    }
+    
+    &:active {
+      background: #c4c4c4;
+      transform: scale(0.95);
+    }
+  }
+  
+  .volumeSlider {
+    width: 70px;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #d4d4d4;
+    outline: none;
+    border-radius: 2px;
+    
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      background: #888;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    &::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      background: #888;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+  }
+} 
