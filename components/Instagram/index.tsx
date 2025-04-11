@@ -3,177 +3,12 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Image from 'next/image';
 import styles from './style.module.scss';
-
-interface Story {
-    id?: string;
-    title: string;
-    image: string;
-    hero: string;
-    description: string;
-    url: string;
-}
+import ProjectModal from '@/components/ProjectModal';
+import { projects, Project } from '@/data/projects';
 
 interface ProjectsExplorerProps {
-    items: Story[];
     closeExplorer: () => void;
 }
-
-interface StoryModalProps {
-    story: Story;
-    onCloseModal: () => void;
-}
-
-const StoryModal: React.FC<StoryModalProps> = ({story, onCloseModal}) => {
-    const [position, setPosition] = useState<{x: number, y: number}>({ 
-        x: window.innerWidth / 2 - 187, 
-        y: window.innerHeight / 2 - 200
-    });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-    const [initialMousePos, setInitialMousePos] = useState({ x: 0, y: 0 });
-    const modalRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setPosition({ 
-            x: window.innerWidth / 2 - 187, 
-            y: window.innerHeight / 2 - 200 
-        });
-    }, []);
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if ((e.target as HTMLElement).tagName === 'BUTTON') {
-            return;
-        }
-        
-        if ((e.target as HTMLElement).closest('.title-bar')) {
-            if (modalRef.current) {
-                setInitialMousePos({ x: e.clientX, y: e.clientY });
-                
-                const rect = modalRef.current.getBoundingClientRect();
-                setDragOffset({
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top
-                });
-                
-                e.preventDefault();
-            }
-        }
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDragging && initialMousePos.x !== 0) {
-            // Check if mouse has moved at least 3px (drag threshold)
-            const deltaX = Math.abs(e.clientX - initialMousePos.x);
-            const deltaY = Math.abs(e.clientY - initialMousePos.y);
-            
-            if (deltaX > 3 || deltaY > 3) {
-                setIsDragging(true);
-            } else {
-                return; // Don't update position until mouse has moved enough
-            }
-        }
-        
-        if (isDragging) {
-            e.preventDefault();
-            let newX = e.clientX - dragOffset.x;
-            let newY = e.clientY - dragOffset.y;
-            
-            newX = Math.max(0, Math.min(newX, window.innerWidth - 375));
-            newY = Math.max(0, Math.min(newY, window.innerHeight - 100));
-            
-            setPosition({ x: newX, y: newY });
-        }
-    };
-
-    const handleMouseUp = () => {
-        setIsDragging(false);
-        setInitialMousePos({ x: 0, y: 0 });
-    };
-
-    useEffect(() => {
-        const handleMouseMoveDocument = (e: MouseEvent) => {
-            if (!isDragging && initialMousePos.x !== 0) {
-                const deltaX = Math.abs(e.clientX - initialMousePos.x);
-                const deltaY = Math.abs(e.clientY - initialMousePos.y);
-                
-                if (deltaX > 3 || deltaY > 3) {
-                    setIsDragging(true);
-                } else {
-                    return;
-                }
-            }
-            
-            if (isDragging) {
-                e.preventDefault();
-                let newX = e.clientX - dragOffset.x;
-                let newY = e.clientY - dragOffset.y;
-                
-                newX = Math.max(0, Math.min(newX, window.innerWidth - 375));
-                newY = Math.max(0, Math.min(newY, window.innerHeight - 100));
-                
-                setPosition({ x: newX, y: newY });
-            }
-        };
-
-        const handleMouseUpDocument = () => {
-            setIsDragging(false);
-            setInitialMousePos({ x: 0, y: 0 });
-        };
-
-        document.addEventListener('mousemove', handleMouseMoveDocument);
-        document.addEventListener('mouseup', handleMouseUpDocument);
-
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMoveDocument);
-            document.removeEventListener('mouseup', handleMouseUpDocument);
-        };
-    }, [isDragging, dragOffset, initialMousePos]);
-
-    return (
-        <div
-            ref={modalRef}
-            className='window'
-            style={{
-                width: '375px',
-                position: 'fixed',
-                top: `${position.y}px`,
-                left: `${position.x}px`,
-                zIndex: 1000,
-                cursor: isDragging ? 'grabbing' : 'default'
-            }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-        >
-            <div className='title-bar' style={{ cursor: 'grab' }}>
-                <div className='title-bar-text'>{story.title}</div>
-                <div className='title-bar-controls'>
-                    <button aria-label='Close' onClick={onCloseModal}></button>
-                </div>
-            </div>
-            <div className='window-body'>
-                <div className={styles.modalBody}>
-                    <img
-                        src={story.hero}
-                        alt='Project'
-                        className={styles.modalImage}
-                    />
-                    <p>{story.description}</p>
-                </div>
-                <div className={styles.modalFooter}>
-                    <a
-                        href={story.url}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='button'
-                    >
-                        Visit
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
-};
 
 const Post: React.FC = () => {
     return (
@@ -200,10 +35,9 @@ const Post: React.FC = () => {
 };
 
 const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
-    items,
     closeExplorer,
 }) => {
-    const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [position, setPosition] = useState<{x: number, y: number}>({ 
         x: window.innerWidth / 2 - 187, 
         y: window.innerHeight / 2 - 200
@@ -220,12 +54,12 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
         });
     }, []);
 
-    const handleStoryClick = (story: Story) => {
-        setSelectedStory(story);
+    const handleProjectClick = (project: Project) => {
+        setSelectedProject(project);
     };
 
     const handleCloseModal = () => {
-        setSelectedStory(null);
+        setSelectedProject(null);
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -243,7 +77,6 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
                     y: e.clientY - rect.top
                 });
                 
-                // Don't set isDragging until mouse actually moves
                 e.preventDefault();
             }
         }
@@ -257,7 +90,7 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
             if (deltaX > 3 || deltaY > 3) {
                 setIsDragging(true);
             } else {
-                return; // Don't update position until mouse has moved enough
+                return;
             }
         }
         
@@ -266,7 +99,6 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
             let newX = e.clientX - dragOffset.x;
             let newY = e.clientY - dragOffset.y;
             
-            // Keep the window on screen
             newX = Math.max(0, Math.min(newX, window.innerWidth - 375));
             newY = Math.max(0, Math.min(newY, window.innerHeight - 100));
             
@@ -281,7 +113,6 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
 
     useEffect(() => {
         const handleMouseMoveDocument = (e: MouseEvent) => {
-            // If mouse is down but hasn't moved enough yet
             if (!isDragging && initialMousePos.x !== 0) {
                 const deltaX = Math.abs(e.clientX - initialMousePos.x);
                 const deltaY = Math.abs(e.clientY - initialMousePos.y);
@@ -365,21 +196,21 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
                                 Your Story
                             </div>
                         </div>
-                        {items.map((item) => (
+                        {projects.map((project) => (
                             <div
-                                key={item.id || item.title}
+                                key={project.id}
                                 className={styles.storyItem}
-                                onClick={() => handleStoryClick(item)}
+                                onClick={() => handleProjectClick(project)}
                             >
                                 <Image
-                                    src={item.image}
+                                    src={project.image}
                                     className={styles.storyThumbnail}
                                     width={50}
                                     height={50}
-                                    alt={item.title}
+                                    alt={project.title}
                                 />
                                 <div className={styles.storyUsername}>
-                                    {item.title}
+                                    {project.title}
                                 </div>
                             </div>
                         ))}
@@ -387,9 +218,9 @@ const ProjectsExplorer: React.FC<ProjectsExplorerProps> = ({
                     <Post />
                 </div>
             </div>
-            {selectedStory && (
-                <StoryModal
-                    story={selectedStory}
+            {selectedProject && (
+                <ProjectModal
+                    project={selectedProject}
                     onCloseModal={handleCloseModal}
                 />
             )}
